@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>User</title>
+	<link rel="stylesheet" href="">
+	<style>
+		h3{
+			color: red;
+		}
+	</style>
+</head>
+<body>
+	<div class="addItem">
+	<h1>Create a New Wish List Item</h1>
+	<br>
+	{% if messages %}
+		{% for message in messages%}
+			<h3>{{message}}</h3>
+		{% endfor %}
+	{% endif %}
+    </div>
+    
+	<div class="add_item">
+    <form action="/create" method="post">
+        {%csrf_token%}
+		<p>Item/Product: <input type="text" name="product">
+		<input class="submit" type="submit" name="add" value="Add Item"></p>
+	</form>
+
+	</div>
+	<a href="/dashboard">Home</a>
+	<a href="/logout">Logout</a>
+</body>
+</html>

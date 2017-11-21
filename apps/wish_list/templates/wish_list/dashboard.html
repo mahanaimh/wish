@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>User</title>
+	<link rel="stylesheet" href="">
+
+	<style>
+		.yours_list{
+			width:600px;
+			height: 300px;
+			border: 1px solid black;
+			overflow: scroll
+		}		
+
+		.others_list{
+			width:600px;
+			height: 300px;
+			border: 1px solid black;
+			overflow: scroll
+		}
+
+		
+	</style>
+</head>
+<body>
+
+	<h1>Welcome {{user.name}}!</h1>
+	<h3>Your Wish List:</h3>
+	<div class="yours_list">
+        <table class="your_table">
+            <tr>
+                <th><h3>Item</h3></th>
+                <th><h3>Added by</h3></th>
+                <th><h3>Date Added</h3></th>
+                <th><h3>Action</h3></th>
+            </tr>
+            {% for item in liked_items %}
+                <tr>
+                    <td><a href="/show/{{item.id}}">{{item.item_name}}</a></td>
+                    <td>{{item.user.name}}</td>
+                    <td>{{item.created_at}}</td>
+                    <td><a href="/remove/{{item.id}}">Remove from my list</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+	</div>
+
+	<h3>Other User's Wish List:</h3>
+	<div class="others_list">
+
+			<table class="others_table">
+				<tr>
+					<th><h3>Item</h3></th>
+					<th><h3>Added by</h3></th>
+					<th><h3>Date Added</h3></th>
+					<th><h3>Action</h3></th>
+				</tr>
+				{% for item in all_items %}
+					<tr>
+						<td><a href="/show/{{item.id}}">{{item.item_name}}</a></td>
+						<td>{{item.user.name}}</td>
+						<td>{{item.created_at}}</td>
+						<td><a href="/add/{{item.id}}">Add to my list</a></td>
+					</tr>
+				{% endfor %}
+			</table>
+	</div>
+	<a id="create" href="/create_item">Create an Item</a>
+	<a id ="logout" href="/logout">Logout</a>
+	<br>
+	<br>
+	<br>
+
+</body>
+</html>

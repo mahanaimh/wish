@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Login/Registration</title>
+<style>
+		.container {
+			width: 900px;
+			height: 900px;
+			margin-left: 75px;
+			margin: 0 auto;
+
+		}
+		.register {
+			display: inline-block;
+			width: 350px;
+			height:375px;
+            padding: 10px;
+            border:  1px solid black;
+		}
+		.login {
+			display: inline-block;
+			width: 250px;
+			height:250px;
+			padding: 10px;
+            vertical-align: top;
+            border:  1px solid black;
+
+		}
+		.submit{
+			width: 60px;
+			height: 30px;
+			background-color: blue;
+			color:white;
+			border-radius: 5px;
+			margin-left: 75px;
+		}
+		#login{
+			margin-top: 25px;
+		}
+		#erMess{
+			color: red;
+		}
+		h1{
+			text-align: center;
+			margin-left: -270px;
+		}
+	</style>
+</head>
+<body>
+	<div class='container'>
+		<h1>Wish List </h1>
+		<div class="register">
+			<h2>Registration</h2>
+			<br>
+			{% if messages %}
+				{% for message in messages%}
+					<h3 id="erMess">{{message}}</h3>
+				{% endfor %}
+			{% endif %}
+            <form id="register" action="/process" method="post">
+                {%csrf_token%}
+				<p>Name: <input type="text" name="name"></p>
+				<p>Username: <input type="text" name="username"></p>
+				<p>Password: <input type="password" name="password"></p>
+				<p style="color: red;">* Password must be at least 8 characters</p>
+				<p>Confirm_Password: <input type="password" name="confirm_password"></p>
+				<p> Hired: <input type="date" name="date"></p>
+				<input id="register"class="submit" type="submit" name="Register" value="Register">
+			</form>
+		</div>
+		<div class="login">
+			<h2>Login</h2>
+			<br>
+            <form action="/login" method="post">
+                {%csrf_token%}
+				<p>Username: <input type="text" name="username"></p>
+				<p>Password: <input type="password" name="password"></p>
+				<input id="login" class="submit" type="submit" value="login">
+			</form>
+		</div>
+	</div>
+</body>
+</html>
